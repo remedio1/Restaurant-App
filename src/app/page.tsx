@@ -8,7 +8,7 @@ import React from 'react'
 
 export default function Home() {
   return (
-    <main>
+    <main className='scroll-smooth overflow-x-hidden'>
         <Slider/>
         <Features/>
         <Offer/>
