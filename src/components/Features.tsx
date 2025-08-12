@@ -1,8 +1,21 @@
 import React from "react";
 import Image from "next/image";
-import { featuredProducts } from "@/itemsData";
+import { ProductType } from "@/types/types";
 
-export default function Features() {
+
+const getData = async ( ) => {
+  const res = await fetch("http://localhost:3000/api/products", {
+    cache:"no-store"
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
+export default async function Features () {
+  const featuredProducts: ProductType[] = await getData();         
   return (
     <div className="w-screen text-red-500 overflow-x-scroll">
       {/* WRAPPER*/}

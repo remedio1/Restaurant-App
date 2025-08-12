@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { loginWithFacebook, loginWithGoogle } from "@/components/actions";
 
 export default function LoginPage() {
   return (
@@ -15,28 +17,38 @@ export default function LoginPage() {
         <div className="p-10 flex flex-col gap-8 md:w-1/2">
           <h1 className="font-bold text-2xl xl:text-3xl">Welcome</h1>
           <p>Log in to your account</p>
-          <button className="flex gap-4 ring-1 ring-orange-100 rounded-md">
-            <Image
-              src="/google.png"
-              alt=""
-              width={20}
-              height={20}
-              className="object-contain"
-            />
-            <span>Sign in with google</span>
-          </button>
-          <button className="flex gap-4 ring-1 ring-blue-100 rounded-md">
-            <Image
-              src="/facebook.png"
-              alt=""
-              width={20}
-              height={20}
-              className="object-contain"
-            />
-            <span>Sign in with facebook</span>
-          </button>
+          <form action={loginWithGoogle}>
+            <button  type="submit" className="flex gap-4 ring-1 ring-orange-100 rounded-md cursor-pointer p-4">
+              <Image
+                src="/google.png"
+                alt=""
+                width={20}
+                height={20}
+                className="object-contain"
+              />
+              <span>Sign in with google</span>
+            </button>
+          </form>
+          <form
+            action={loginWithFacebook}
+          >
+            <button type="submit" className="flex gap-4 ring-1 ring-blue-100 rounded-md cursor-pointer  p-4">
+              <Image
+                src="/facebook.png"
+                alt=""
+                width={20}
+                height={20}
+                className="object-contain"
+              />
+              <span>Sign in with facebook</span>
+            </button>
+          </form>
           <p className="text-sm">
-            Have a problem?<Link className="underline" href="/">  Contact Us</Link>
+            Have a problem?
+            <Link className="underline" href="/">
+              {" "}
+              Contact Us
+            </Link>
           </p>
         </div>
       </div>

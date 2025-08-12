@@ -1,9 +1,16 @@
 import prisma from "@/utils/connect";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const cat = searchParams.get("cat");
+
   try {
-    const products = await prisma.product.findMany();
+    const products = await prisma.product.findMany({
+      where: {
+        ...(cat ? { catSlug: cat } : { isFeatured: true }),
+      },
+    });
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
     console.log("Error fetching categories:", error);
