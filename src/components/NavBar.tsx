@@ -3,10 +3,12 @@ import React from "react";
 import Menu from "./Menu";
 import CartIcon from "./CartIcon";
 import Image from "next/image";
+import { auth } from "@/auth";
+import { logout } from "@/utils/actions";
 
-export default function NavBar() {
+export default async function NavBar() {
   // Simulating user authentication status
-  const user = false;
+  const session = await auth();
   return (
     <div className="h-12 text-red-500 p-4 flex justify-between items-center border-b-2 border-red-500 uppercase bg-white shadow-md md:h-20">
       <div className="hidden md:flex gap-4 flex-1">
@@ -31,10 +33,17 @@ export default function NavBar() {
           <Image src="/phone.png" alt="" width={20} height={20} />
           <span>11 99450 5618</span>
         </div>
-        {!user ? (
-          <Link href="/login">Login</Link>
-        ) : (
+        {session?.user ? (
+          <div className="gap-2">
           <Link href="/orders">Pedidos</Link>
+          <form action={logout}>
+            <button type="submit" className="cursor-pointer uppercase" >
+              Logout
+            </button>
+          </form>
+          </div>
+        ) : (
+          <Link href="/login">Login</Link>
         )}
         <CartIcon />
       </div>

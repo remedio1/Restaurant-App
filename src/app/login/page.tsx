@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
-import { loginWithFacebook, loginWithGoogle } from "@/components/actions";
+
+import { loginWithFacebook, loginWithGoogle } from "@/utils/actions";
 
 export default function LoginPage() {
   return (

@@ -23,6 +23,7 @@ model User {
   isAdmin       Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
+  // Optional for WebAuthn support
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -98,7 +99,6 @@ model Order {
   products  Json[]
   status    String
   intent_id String?  @unique
-  userEmail String
-  
 
+  userEmail String
 }
