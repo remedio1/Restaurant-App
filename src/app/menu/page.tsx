@@ -29,7 +29,7 @@ export default async function MenuPage () {
                             <div className={`text-${item.color} w-1/2`}>
             <h1 className="text-3xl font-bold uppercase ">{item.title}</h1>
             <p className="text-sm my-4">{item.desc}</p>
-            <button className={`hidden sm:block bg-${item.color} text-${item.color === "black" ? "white" : "red-500"} rounded-md py-2 px-4 mt-6`}>Explore</button>
+            <button className={`hidden sm:block bg-${item.color} text-${item.color === "black" ? "white" : "red-500"} cursor-pointer rounded-md py-2 px-4 mt-6`}>Explore</button>
           </div>
         </Link>
       ))}

@@ -5,11 +5,9 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import Notification from "@/components/Notification";
 import { Inter } from "next/font/google";
-
+import { QueryProvider } from "../components/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
-
-
 
 export const metadata: Metadata = {
   title: "My Restaurant",
@@ -25,13 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
-      <body> 
-        
-        <Notification/>
-        <NavBar/>
-        {children} 
-        <Footer/>
-        
+      <body>
+        <QueryProvider>
+          <Notification />
+          <NavBar />
+          {children}
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );

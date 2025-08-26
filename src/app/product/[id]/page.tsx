@@ -10,19 +10,25 @@ export default function SingleProduct() {
       {/* IMAGE CONTAINER */}
       {singleProduct.img && (
         <div className="relative w-full h-1/2 md:h-[70%]">
-          <Image className="object-contain" src={singleProduct.img} alt="" fill />
+          <Image
+            className="object-contain"
+            src={singleProduct.img}
+            alt=""
+            fill
+          />
         </div>
       )}
       {/* TEXT CONTAINER */}
       <div className="flex flex-col  w-full h-1/2 gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8">
-        <h1 className="text-3xl font-bold uppercase md:text-5xl">{singleProduct.title}</h1>
+        <h1 className="text-3xl font-bold uppercase md:text-5xl">
+          {singleProduct.title}
+        </h1>
         <p className="text-xl">{singleProduct.desc}</p>
-        <Price 
+        <Price
           price={singleProduct.price}
           id={singleProduct.id}
           options={singleProduct.options}
         />
-        
       </div>
     </div>
   );

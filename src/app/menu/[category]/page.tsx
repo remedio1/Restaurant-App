@@ -43,7 +43,7 @@ export default async function CategoryPage({ params }: Props) {
           <div className="flex justify-between items-center font-bold text-red-400 group">
             <h1 className="text-xl">{pizza.title}</h1>
             <h2 className="text-xl group-hover:hidden">{pizza.price}</h2>
-            <button className="hidden group-hover:block uppercase bg-red-500 rounded-md text-white p-2">
+            <button className="hidden group-hover:block uppercase bg-red-500 rounded-md text-white p-2 cursor-pointer">
               Adicione ao carrinho
             </button>
           </div>

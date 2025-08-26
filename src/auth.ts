@@ -11,6 +11,7 @@ declare module "next-auth" {
       isAdmin: boolean;
     } & DefaultSession["user"];
   }
+  
 }
 
 declare module "next-auth/jwt" {
