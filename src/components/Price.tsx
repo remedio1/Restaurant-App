@@ -1,28 +1,29 @@
 "use client";
-import React from "react";
+import { Product, ProductType } from "@/types/types";
+import { useCartStore } from "@/utils/store";
+import React, { use } from "react";
 
-type PriceProps = {
-  price: number;
-  id: number;
-  options?: { title: string; additionalPrice: number }[];
-};
-
-export default function Price(props: PriceProps) {
-  const [total, setTotal] = React.useState(props.price);
+export default function Price({ product }: { product: ProductType }) {
+  const [total, setTotal] = React.useState(product.price);
   const [quantity, setQuantity] = React.useState(1);
   const [selected, setSelected] = React.useState(0);
 
+  const {} = useCartStore();
+
   React.useEffect(() => {
-    const optionPrice = props.options?.[selected]?.additionalPrice || 0;
-    setTotal((props.price + optionPrice) * quantity);
-  }, [props.price, props.options, selected, quantity]);
+    if (product.options?.length) {
+      setTotal(
+        quantity * product.price + product.options[selected].additionalPrice
+      )
+    }
+  }, [quantity, selected, product]);
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">${total.toFixed(2)}</h2>
+      <h2 className="text-2xl font-bold">${total}</h2>
 
       <div className="flex gap-4 font-bold ">
-        {props.options?.map((option, index) => (
+        {product.options?.map((option, index) => (
           <button
             className="min-w-[6rem] p-2 ring-1 ring-red-500 rounded-md cursor-pointer"
             key={option.title}
@@ -40,12 +41,21 @@ export default function Price(props: PriceProps) {
       <div className="flex gap-2 justify-between">
         {/*quantity */}
         <div className="flex justify-between items-center gap-2 w-full ring-1 ring-red-500 rounded-md p-2   ">
-          <span className="text-red-500 font-bold">Quantity</span>
+          <span className="text-red-500 font-bold w-50">Quantity</span>
           <div className="flex items-center gap-2 text-xl">
-            <button onClick={() => setQuantity(prev=>(prev > 1 ? prev - 1 : 1))
-            } className="cursor-pointer">{"<"}</button>
+            <button
+              onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
+              className="cursor-pointer"
+            >
+              {"<"}
+            </button>
             <span>{quantity}</span>
-            <button onClick={() => setQuantity(prev=>(prev + 1))} className="cursor-pointer">{">"}</button>
+            <button
+              onClick={() => setQuantity((prev) => prev + 1)}
+              className="cursor-pointer"
+            >
+              {">"}
+            </button>
           </div>
         </div>
         {/*cart button */}

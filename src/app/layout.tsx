@@ -6,6 +6,9 @@ import Footer from "@/components/Footer";
 import Notification from "@/components/Notification";
 import { Inter } from "next/font/google";
 import { QueryProvider } from "../components/QueryProvider";
+import { SessionProvider } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +27,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body>
+        <SessionProvider >
         <QueryProvider>
           <Notification />
           <NavBar />
           {children}
           <Footer />
+          <ToastContainer position="bottom-right" theme="dark" autoClose={3000}/>
         </QueryProvider>
+        </SessionProvider>
       </body>
     </html>
   );
