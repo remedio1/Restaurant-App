@@ -30,7 +30,7 @@ export default function RootLayout({
         <SessionProvider>
           <QueryProvider>
             <Notification />
-            <NavBar />
+            <NavBar /> 
             {children}
             <Footer />
             <ToastContainer

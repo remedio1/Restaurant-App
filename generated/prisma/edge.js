@@ -35,12 +35,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.14.0
- * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
+ * Prisma Client JS version: 6.15.0
+ * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
  */
 Prisma.prismaVersion = {
-  client: "6.14.0",
-  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
+  client: "6.15.0",
+  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -201,7 +201,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\aleh2\\Documents\\RestaurantApp\\generated\\prisma",
+      "value": "C:\\Users\\aleh2\\OneDrive\\Documentos\\vscode\\restaurantapp\\Restaurant-App\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -215,7 +215,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\aleh2\\Documents\\RestaurantApp\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\aleh2\\OneDrive\\Documentos\\vscode\\restaurantapp\\Restaurant-App\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -223,8 +223,8 @@ const config = {
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
-  "clientVersion": "6.14.0",
-  "engineVersion": "717184b7b35ea05dfa71a3236b7af656013e1e49",
+  "clientVersion": "6.15.0",
+  "engineVersion": "85179d7826409ee107a6ba334b5e305ae3fba9fb",
   "datasourceNames": [
     "db"
   ],
@@ -237,9 +237,9 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String    @unique\n  emailVerified DateTime?\n  image         String?\n  isAdmin       Boolean   @default(false)\n  accounts      Account[]\n  sessions      Session[]\n  // Optional for WebAuthn support\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Account {\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String?\n  access_token      String?\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String?\n  session_state     String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([provider, providerAccountId])\n}\n\nmodel Session {\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@id([identifier, token])\n}\n\nmodel Category {\n  id        String    @id @default(cuid())\n  createdAt DateTime  @default(now())\n  title     String\n  desc      String\n  color     String\n  img       String\n  slug      String    @unique\n  products  Product[]\n}\n\nmodel Product {\n  id         String   @id @default(cuid())\n  createdAt  DateTime @default(now())\n  title      String\n  desc       String\n  img        String?\n  price      Decimal\n  isFeatured Boolean  @default(false)\n  options    Json[]\n  category   Category @relation(fields: [catSlug], references: [slug])\n  catSlug    String\n}\n\nmodel Order {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now())\n  price     Decimal\n  products  Json[]\n  status    String\n  intent_id String?  @unique\n\n  userEmail String\n}\n",
-  "inlineSchemaHash": "4081d6598f7ee4ddffdbf7a811451696ce1c900cb95143ab0f1a62411e4e7e42",
-  "copyEngine": false
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String    @unique\n  emailVerified DateTime?\n  image         String?\n  isAdmin       Boolean   @default(false)\n  accounts      Account[]\n  sessions      Session[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Account {\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String?\n  access_token      String?\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String?\n  session_state     String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([provider, providerAccountId])\n}\n\nmodel Session {\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@id([identifier, token])\n}\n\nmodel Category {\n  id        String    @id @default(cuid())\n  createdAt DateTime  @default(now())\n  title     String\n  desc      String\n  color     String\n  img       String\n  slug      String    @unique\n  products  Product[]\n}\n\nmodel Product {\n  id         String   @id @default(cuid())\n  createdAt  DateTime @default(now())\n  title      String\n  desc       String\n  img        String?\n  price      Decimal\n  isFeatured Boolean  @default(false)\n  options    Json[]\n  category   Category @relation(fields: [catSlug], references: [slug])\n  catSlug    String\n}\n\nmodel Order {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now())\n  price     Decimal\n  products  Json[]\n  status    String\n  intent_id String?  @unique\n  userEmail String\n}\n",
+  "inlineSchemaHash": "a34ff939ac1de882b4630ae673561a34f963d058273e467dd7a8f752d395f2df",
+  "copyEngine": true
 }
 config.dirname = '/'
 
