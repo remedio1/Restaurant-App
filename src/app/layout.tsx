@@ -27,14 +27,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body>
-        <SessionProvider >
-        <QueryProvider>
-          <Notification />
-          <NavBar />
-          {children}
-          <Footer />
-          <ToastContainer position="bottom-right" theme="dark" autoClose={3000}/>
-        </QueryProvider>
+        <SessionProvider>
+          <QueryProvider>
+            <Notification />
+            <NavBar />
+            {children}
+            <Footer />
+            <ToastContainer
+              position="bottom-right"
+              theme="dark"
+              autoClose={3000}
+            />
+          </QueryProvider>
         </SessionProvider>
       </body>
     </html>
