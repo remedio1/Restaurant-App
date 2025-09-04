@@ -1,9 +1,10 @@
 "use client";
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import Image from "next/image";
 import { useCartStore } from "@/utils/store";
 
 export default function CartPage() {
+  
   const { products, totalItems, totalPrice, removeFromCart } = useCartStore();
   return (
     <div className="h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-red-500 lg:flex-row">
@@ -19,7 +20,7 @@ export default function CartPage() {
               <Image src={product.img} alt="Product" width={100} height={100} />
             )}
             <div>
-              <h1 className="font-bold text-2xl">{product.title}</h1>
+              <h1 className="font-bold text-2xl">{product.quantity}x {}{product.title}</h1>
               <h2 className="text-xl">{product.optionTitle}</h2>
             </div>
             <p className="font-bold">${product.price}</p>

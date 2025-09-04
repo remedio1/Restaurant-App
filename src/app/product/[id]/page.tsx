@@ -18,9 +18,11 @@ const getData = async (id: string) => {
 export default async function SingleProduct({
   params,
 }: {
-  params: { id: string };
+  params: Promise <{ id: string }>;
 }) {
-  const singleProduct: ProductType = await getData(params.id);
+  const { id } = await params;
+
+  const singleProduct: ProductType = await getData(id);
   return (
     <div className=" p-4 flex flex-col items-center justify-around h-screen lg:px-20 text-red-500 md:flex-row md:gap-8 md:items-center">
       {/* IMAGE CONTAINER */}

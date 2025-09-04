@@ -1,15 +1,16 @@
 'use client'
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useCartStore } from "@/utils/store";
 
 export default function CartIcon() {
+  
   const {totalItems} = useCartStore();
   return (
     <Link href="/cart" className="flex items-center gap-2">
       <div className="relative w-8 h-8 md:w-5 md:h-5">
-        <Image src="/cart.png" alt="" fill />
+        <Image src="/cart.png" alt="" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
       </div>
       <span> Carrinho ({totalItems})</span>
     </Link>

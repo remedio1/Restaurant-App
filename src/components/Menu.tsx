@@ -27,6 +27,7 @@ export default function Menu() {
           width={20}
           height={20}
           onClick={() => setOpen(true)}
+          style={{ height: "auto", width: "20px" }}
         />
       ) : (
         <Image
