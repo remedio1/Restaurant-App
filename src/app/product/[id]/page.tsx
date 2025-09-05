@@ -1,8 +1,8 @@
 import React from "react";
-
 import Image from "next/image";
 import Price from "@/components/Price";
 import { ProductType } from "@/types/types";
+import DeleteButton from "@/components/DeleteButton";
 
 const getData = async (id: string) => {
   const res = await fetch(`http://localhost:3000/api/products/${id}`, {
@@ -18,13 +18,13 @@ const getData = async (id: string) => {
 export default async function SingleProduct({
   params,
 }: {
-  params: Promise <{ id: string }>;
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
 
   const singleProduct: ProductType = await getData(id);
   return (
-    <div className=" p-4 flex flex-col items-center justify-around h-screen lg:px-20 text-red-500 md:flex-row md:gap-8 md:items-center">
+    <div className=" p-4 flex flex-col items-center justify-around h-screen lg:px-20 text-red-500 md:flex-row md:gap-8 md:items-center relative">
       {/* IMAGE CONTAINER */}
       {singleProduct.img && (
         <div className="relative w-full h-1/2 md:h-[70%]">
@@ -45,6 +45,8 @@ export default async function SingleProduct({
 
         <Price product={singleProduct} />
       </div>
+      {/* DELETE BUTTON */}
+      <DeleteButton id={singleProduct.id} />
     </div>
   );
 }
