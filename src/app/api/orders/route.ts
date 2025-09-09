@@ -35,3 +35,29 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
+// CREATE ORDER 
+export async function POST(req: NextRequest) {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    return NextResponse.json ({error: "Unauthorized"}, {status:401})
+  }
+
+  try {
+    const body = await req.json();
+    if (session.user) {
+      const newOrder = await prisma.order.create({
+        data: body
+      });
+      return NextResponse.json (newOrder.id, {status:201})
+    }
+    
+
+  } catch (error) {
+      console.error ("Error creating order:", error);
+      return NextResponse.json ({error: "Internal Server Error"}, {status:500})
+      
+  }
+
+}
