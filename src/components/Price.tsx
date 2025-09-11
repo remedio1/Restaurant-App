@@ -10,12 +10,9 @@ export default function Price({ product }: { product: ProductType }) {
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
 
-  
   const { addToCart } = useCartStore();
 
-  // Hook useEffect corrigido para lidar com todos os casos
   useEffect(() => {
-    // Calcula o preço base + o preço da opção selecionada
     let pricePerItem = product.price;
 
     if (
@@ -26,7 +23,6 @@ export default function Price({ product }: { product: ProductType }) {
       pricePerItem += product.options[selected].additionalPrice;
     }
 
-    // Calcula o total multiplicando o preço final por unidade pela quantidade
     setTotal(quantity * pricePerItem);
   }, [quantity, selected, product]);
 

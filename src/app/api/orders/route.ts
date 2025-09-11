@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// CREATE ORDER 
+// // CREATE ORDER 
 export async function POST(req: NextRequest) {
   const session = await auth();
 
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       const newOrder = await prisma.order.create({
         data: body
       });
-      return NextResponse.json (newOrder.id, {status:201})
+        return NextResponse.json (newOrder, {status:201})
     }
     
 
