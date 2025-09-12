@@ -60,19 +60,25 @@ function PaymentForm() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto
-    ">
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <AddressForm />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+    <div
+      className="w-full max-w-md mx-auto
+    "
+    >
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <PaymentElement id="payment-element" options={paymentElementOptions} />
+        <AddressForm />
+        <button disabled={isLoading || !stripe || !elements} id="submit">
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+        {/* Show any error or success messages */}
+        {message && <div id="payment-message">{message}</div>}
+      </form>
     </div>
   );
 }
@@ -80,14 +86,17 @@ function PaymentForm() {
 export default function CheckoutForm({ id }: { id: string }) {
   const [clientSecret, setClientSecret] = useState("");
   useEffect(() => {
-    if(!id) return;
+    if (!id) return;
     // A função de fetch deve estar dentro do useEffect
     const makeRequest = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/create-intent/${id}`, {
-          // URL relativa é melhor
-          method: "POST",
-        });
+        const res = await fetch(
+          `http://localhost:3000/api/create-intent/${id}`,
+          {
+            // URL relativa é melhor
+            method: "POST",
+          }
+        );
         if (!res.ok) {
           throw new Error("Failed to create PaymentIntent");
         }
@@ -108,9 +117,9 @@ export default function CheckoutForm({ id }: { id: string }) {
   };
   return (
     clientSecret && (
-    <Elements stripe={stripePromise} options={options}>
-      <PaymentForm />
-    </Elements>
+      <Elements stripe={stripePromise} options={options}>
+        <PaymentForm />
+      </Elements>
     )
   );
 }
